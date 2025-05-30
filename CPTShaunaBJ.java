@@ -28,6 +28,7 @@ import java.awt.image.BufferedImage;
 			con.println("                                                         (P) Play");
 			con.println("                                                  (L) Leaderboard");
 			con.println("                                                         (Q) Quit");
+			con.println("                                                         (H) Help");
 		    con.println("                                                                          ");
 		    
 			con.println("                                             Enter a Key Letter to begin: ");
@@ -50,6 +51,13 @@ import java.awt.image.BufferedImage;
 		}else if(charkey == 'Q' || charkey == 'q'){
 			con.clear();
 			
+		}else if(charkey == 'H' || charkey == 'h'){
+			con.clear();
+			con.setBackgroundColor(Color.BLACK);
+			charkey = Blackjacktools.help(con);	
+			
+		}
+			
 			
 		}
 	}
@@ -58,6 +66,6 @@ import java.awt.image.BufferedImage;
 		
 		
 		
-		}
+		
 	
 	
