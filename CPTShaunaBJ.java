@@ -48,10 +48,12 @@ import java.awt.image.BufferedImage;
 			con.setBackgroundColor(Color.BLACK);
 			charkey = Blackjacktools.leaderboard(con);
 		
-		}else if(charkey == 'Q' || charkey == 'q'){
+		}else if(charkey == 'Q' || charkey == 'q'){ // QUIT TOOLS
 			con.clear();
+			con.setBackgroundColor(Color.BLACK);
+			charkey = Blackjacktools.quit(con);
 			
-		}else if(charkey == 'H' || charkey == 'h'){
+		}else if(charkey == 'H' || charkey == 'h'){ //HELP TOOLS
 			con.clear();
 			con.setBackgroundColor(Color.BLACK);
 			charkey = Blackjacktools.help(con);	
