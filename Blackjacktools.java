@@ -3,7 +3,36 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 
 public class Blackjacktools{
-	public static char playtime(Console con){
+	public static char playtime(Console con){	
+	
+	// Setting up 2D Array
+	String strcards[][];
+	strcards = new String[6][3];
+	
+	                                                                  // Hard-coding 
+	// making the value of the cards
+	strcards[0][0] = "1";
+	strcards[1][0] = "2";
+	strcards[2][0] = "3";
+	strcards[3][0] = "4";
+	strcards[4][0] = "5";
+	strcards[5][0] = "6";
+	
+	// making the suits of the cards 
+	strcards[0][1] = "diamonds";
+	strcards[1][1] = "clubs";
+	strcards[2][1] = "hearts";
+	strcards[3][1] = "spades";
+	strcards[4][1] = "diamonds";
+	strcards[5][1] = "clubs";
+	
+	// print out array
+	int intcount;
+	con.println("test of desk");
+	for(intcount = 0; intcount < 5; intcount++){
+		con.println(strcards[intcount][0] + " - " + strcards[intcount][1]);
+	}
+	
 	char charkey = con.getChar();
 	return charkey;
 }
