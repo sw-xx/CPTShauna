@@ -27,6 +27,10 @@ public class Blackjacktools{
 			return charkeyhelp;
 
 	}
+	public static char quit(Console con){
+		char charq = con.getChar();
+		return charq;
+	}
 	
 	
 	}
