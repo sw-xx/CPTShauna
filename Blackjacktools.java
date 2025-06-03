@@ -6,56 +6,27 @@ public class Blackjacktools{
 	public static char playtime(Console con){	
 	// Setting up 2D Array
 	String strcards[][];
-	strcards = new String[15][3];
+	strcards = new String[52][3];
 	
-	                                                                  // Hard-coding 
-	// making the value of the cards
+	String[] suits = {"diamonds", "clubs", "hearts", "spades"};
+	String[] ranks = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13"};
 	
-	strcards[0][0] = "1";
-	strcards[1][0] = "2";
-	strcards[2][0] = "3";
-	strcards[3][0] = "4";
-	strcards[4][0] = "5";
-	strcards[5][0] = "6";
-	strcards[6][0] = "7";
-	strcards[7][0] = "8";
-	strcards[8][0] = "9";
-	strcards[9][0] = "10";
-	strcards[10][0] = "11";
-	strcards[11][0] = "12";
-	strcards[12][0] = "13";
-	strcards[13][0] = "1";
-	strcards[14][0] = "2";
-	
-	
-	
-	// making the suits of the cards 
-		// diamonds suits 
-				strcards[0][1] = "diamonds";
-				strcards[1][1] = "diamonds";
-				strcards[2][1] = "diamonds";
-				strcards[3][1] = "diamonds";
-				strcards[4][1] = "diamonds";
-				strcards[5][1] = "diamonds";
-				strcards[6][1] = "diamonds";
-				strcards[7][1] = "diamonds";
-				strcards[8][1] = "diamonds";
-				strcards[9][1] = "diamonds";
-				strcards[10][1] = "diamonds";
-				strcards[11][1] = "diamonds";
-				strcards[12][1] = "diamonds";
-		
-		// clubs suits 
-				strcards[13][1] = "clubs";
-				strcards[14][1] = "clubs";
-				
-	// print out array
 	int intcount;
-	con.println("test of desk");
-	for(intcount = 0; intcount < 15; intcount++){
-		con.println(strcards[intcount][0] + " - " + strcards[intcount][1] + " - ");
-	}
 	
+	for(intcount = 0; intcount < 52; intcount++){
+		strcards[intcount][0] = ranks[intcount % 13];
+		strcards[intcount][1] = suits[intcount / 13];
+	}
+	for(intcount = 0; intcount < 52; intcount++){
+		System.out.println(strcards[intcount][0] + " - " + strcards[intcount][1]);
+
+	// Another 2D Array - one for DEALER, one for PLAYER 
+	
+	
+
+
+
+}
 	char charkey = con.getChar();
 	return charkey;
 }
