@@ -19,10 +19,12 @@ public class Blackjacktools{
 	}
 	
 	//bubble sorting 
-	String strtempvalue;
-	String strtempsuit;
-	String strtemprandom;
 	
+		// temporary values 
+			String strtempvalue;
+			String strtempsuit;
+			String strtemprandom;
+		
 	for(int pass = 0; pass < 52 - 1; pass++){
 		for(intcount = 0; intcount < 52 - 1; intcount++){
 			if(Double.parseDouble(deck[intcount][2]) > Double.parseDouble(deck[intcount + 1][2])){
@@ -48,17 +50,45 @@ public class Blackjacktools{
 	for(intcount = 0; intcount < 52; intcount++){
 		System.out.println("card " + (intcount + 1) + ": " + deck[intcount][0] + " of " + deck[intcount][1] + " - " + deck[intcount][2]);
 	}	
-			char charkey = con.getChar();
-
 	
-			return charkey;
-}
+	// setting up the player and dealer hand 
+	String[][] playerhand = new String[5][2];
+	String[][] dealerhand = new String[5][2];
 	
+	for(intcount = 0; intcount < 5; intcount++){
+		playerhand[intcount][0] = deck[intcount][0];
+		playerhand[intcount][1] = deck[intcount][1];
+		
+		dealerhand[intcount][0] = deck[intcount + 5][0];
+		dealerhand[intcount][1] = deck[intcount + 5][1];
+	}
+		 
+	con.println("PLAYER hand: ");
+	for(intcount = 0; intcount < 5; intcount++){
+		con.println(" ");
+		con.println(playerhand[intcount][0] + " of " + playerhand[intcount][1]);
+	}
+	con.println(" ");
+	con.println(" ");
+	con.println(" ");
 
+	con.println("DEALER hand: ");
+	for(intcount = 0; intcount < 5; intcount++){
+		con.println(" ");
+		con.println(dealerhand[intcount][0] + " of " + dealerhand[intcount][1]);
+		
+		}
+		
+		char charkey = con.getChar();
+		return charkey;
+
+	}
+	
 	public static char leaderboard(Console con){
 		char charl = con.getChar();
 		return charl;
 	}
+	
 	public static char help(Console con){
 		
 		con.println("Here are some of the special features that make the game called BlackJack");
@@ -74,12 +104,18 @@ public class Blackjacktools{
 			return charkeyhelp;
 
 	}
+
 	public static char quit(Console con){
 		char charq = con.getChar();
 		return charq;
 	}
+
+}
+
+	
+
 	
 	
-	}
+	
 	
 
