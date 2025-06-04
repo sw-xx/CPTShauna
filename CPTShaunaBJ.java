@@ -32,6 +32,7 @@ import java.awt.image.BufferedImage;
 		    con.println("                                                                          ");
 		    con.print("                                                     Enter a name: "); //con.print because we want it to be after the colon
 		    String strname = con.readLine();
+		    //TextFileOutput to take the name into a different file and then transfer it back to the leaderboard?
 		    
 			con.println("                                             Enter a Key Letter to begin: ");
 			                                                          // setting up the singular character 
