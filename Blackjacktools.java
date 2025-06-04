@@ -4,32 +4,56 @@ import java.awt.image.BufferedImage;
 
 public class Blackjacktools{
 	public static char playtime(Console con){	
+		
 	// Setting up 2D Array
-	String strcards[][];
-	strcards = new String[52][3];
-	
+	String[][] deck = new String[52][3];
 	String[] suits = {"diamonds", "clubs", "hearts", "spades"};
-	String[] ranks = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13"};
 	
+	// creating desk 
 	int intcount;
-	
 	for(intcount = 0; intcount < 52; intcount++){
-		strcards[intcount][0] = ranks[intcount % 13];
-		strcards[intcount][1] = suits[intcount / 13];
+		deck[intcount][0] = "" + ((intcount % 13) + 1); // this would make the value 1 to 13 
+		deck[intcount][1] = suits[intcount / 13]; // 13 of each suit 
+		deck[intcount][2] = "" + (Math.random()); // random number for shuffling 
+		System.out.println("Card "+(intcount + 1) + ": " + deck[intcount][0] + " of " + deck[intcount][1]);
 	}
+	
+	//bubble sorting 
+	String strtempvalue;
+	String strtempsuit;
+	String strtemprandom;
+	
+	for(int pass = 0; pass < 52 - 1; pass++){
+		for(intcount = 0; intcount < 52 - 1; intcount++){
+			if(Double.parseDouble(deck[intcount][2]) > Double.parseDouble(deck[intcount + 1][2])){
+				// swapping value 
+				strtempvalue = deck[intcount][0];
+				deck[intcount][0] = deck[intcount + 1][0];
+				deck[intcount+1][0] = strtempvalue;
+				
+				// swapping suits
+				strtempsuit = deck[intcount][1];
+				deck[intcount][1] = deck[intcount+1][1];
+				deck[intcount+1][1] = strtempsuit;
+				
+				//swap random number 
+				strtemprandom = deck[intcount][2];
+				deck[intcount][2] = deck[intcount+1][2];
+				deck[intcount+1][2] = strtemprandom; 
+			}
+		}
+	}
+
+	System.out.println("\nAfter Sorting (shuffled): " );
 	for(intcount = 0; intcount < 52; intcount++){
-		System.out.println(strcards[intcount][0] + " - " + strcards[intcount][1]);
+		System.out.println("card " + (intcount + 1) + ": " + deck[intcount][0] + " of " + deck[intcount][1] + " - " + deck[intcount][2]);
+	}	
+			char charkey = con.getChar();
 
-	// Another 2D Array - one for DEALER, one for PLAYER 
 	
+			return charkey;
+}
 	
-
-
-
-}
-	char charkey = con.getChar();
-	return charkey;
-}
 
 	public static char leaderboard(Console con){
 		char charl = con.getChar();
