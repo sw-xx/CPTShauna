@@ -28,6 +28,7 @@ public class Blackjacktools{
 	for(int pass = 0; pass < 52 - 1; pass++){
 		for(intcount = 0; intcount < 52 - 1; intcount++){
 			if(Double.parseDouble(deck[intcount][2]) > Double.parseDouble(deck[intcount + 1][2])){
+				
 				// swapping value 
 				strtempvalue = deck[intcount][0];
 				deck[intcount][0] = deck[intcount + 1][0];
@@ -63,26 +64,91 @@ public class Blackjacktools{
 		dealerhand[intcount][1] = deck[intcount + 5][1];
 	}
 		 
-	con.println("PLAYER hand: ");
+	System.out.println("PLAYER hand: ");
 	for(intcount = 0; intcount < 5; intcount++){
 		con.println(" ");
-		con.println(playerhand[intcount][0] + " of " + playerhand[intcount][1]);
+		System.out.println(playerhand[intcount][0] + " of " + playerhand[intcount][1]);
 	}
 	con.println(" ");
 	con.println(" ");
 	con.println(" ");
 
-	con.println("DEALER hand: ");
+	System.out.println("DEALER hand: ");
 	for(intcount = 0; intcount < 5; intcount++){
 		con.println(" ");
-		con.println(dealerhand[intcount][0] + " of " + dealerhand[intcount][1]);
+		System.out.println(dealerhand[intcount][0] + " of " + dealerhand[intcount][1]);
 		
 		}
+		
+		con.clear();
+	//note for players 
+	con.println("**Try not to get confused with the total. Remember that 11, 12, 13 = 10 and that a 1 is sometimes = 11");	
+	
+	// player first two cards
+	int intplayer2 = 0;
+	int intcardsused = 2;
+	
+	con.println("\nDealers Hand");
+	con.println(deck[5][0] + " of " + deck[5][1]); // dealers first card 
+	con.println("next card - hidden");
+	
+	con.println("\nPlayers Hand");
+	for(intcount = 0; intcount < 2; intcount++){
+		con.println(deck[intcount][0] + " of " + deck[intcount][1]);
+		int intcardvalue = Integer.parseInt(deck[intcount][0]);
+			
+		if(intcardvalue > 10){
+			intcardvalue = 10;
+		}
+		else if(intcardvalue == 1){
+			intcardvalue = 11;
+		}
+					intplayer2 += intcardvalue; // totalling the first two cards
+
+	}
+	
+	con.println("Total: " + intplayer2);
+	
+	// Players turn 
+	boolean blnstandings = false;
+	while(intplayer2 < 21 && !blnstandings && intcardsused < 5){
+		con.println("\n (H)Hit or (S)Stand");
+		char charchoice = con.getChar();
+		
+	if(charchoice == 'H' || charchoice == 'h'){ // if they press hit 
+		
+		
+		//drawing after two given cards 
+		con.println("Third card: " + deck[intcardsused][0] + " of " + deck[intcardsused][1]);
+		int intcardvalue  = Integer.parseInt(deck[intcardsused][0]);
+		
+		if(intcardvalue > 10){
+			intcardvalue = 10;
+		}else if(intcardvalue == 1){
+			intcardvalue = 11;
+		}
+		intplayer2 += intcardvalue;
+		intcardsused++;
+		con.println("New Total: " + intplayer2);
+		
+		if(intplayer2 > 21){
+			con.println("Bust! You lose");
+			return con.getChar();
+		}
+		
+	}else if(charchoice == 's' || charchoice == 'S'){
+		blnstandings = true;
+	}
+}
+			
+		
 		
 		char charkey = con.getChar();
 		return charkey;
 
 	}
+
+
 	
 	public static char leaderboard(Console con){
 		char charl = con.getChar();
@@ -109,8 +175,9 @@ public class Blackjacktools{
 		char charq = con.getChar();
 		return charq;
 	}
-
 }
+
+
 
 	
 
