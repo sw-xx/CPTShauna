@@ -39,24 +39,24 @@ import java.awt.image.BufferedImage;
 			                                                          char charkey = con.getChar();
 			System.out.println("you entered: "+charkey);
 			
+		 charkey = Character.toLowerCase(con.getChar());
 		
-		
-		if(charkey == 'P' || charkey == 'p'){ // PLAYTIMETOOLS
+		if(charkey == 'p'){ // PLAYTIMETOOLS
 			con.clear();
 			con.setBackgroundColor(Color.BLACK);
 			charkey = Blackjacktools.playtime(con);
 			
-		}else if(charkey == 'L' || charkey == 'l'){ // LEADERBAORD TOOLS 
+		}else if(charkey == 'l'){ // LEADERBAORD TOOLS 
 			con.clear();
 			con.setBackgroundColor(Color.BLACK);
 			charkey = Blackjacktools.leaderboard(con);
 		
-		}else if(charkey == 'Q' || charkey == 'q'){ // QUIT TOOLS
+		}else if(charkey == 'q'){ // QUIT TOOLS
 			con.clear();
 			con.setBackgroundColor(Color.BLACK);
 			charkey = Blackjacktools.quit(con);
 			
-		}else if(charkey == 'H' || charkey == 'h'){ //HELP TOOLS
+		}else if(charkey == 'h'){ //HELP TOOLS
 			con.clear();
 			con.setBackgroundColor(Color.BLACK);
 			charkey = Blackjacktools.help(con);	
