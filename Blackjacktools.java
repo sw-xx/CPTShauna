@@ -64,7 +64,7 @@ public class Blackjacktools{
 		dealerhand[intcount][1] = deck[intcount + 5][1];
 	}
 		 
-	System.out.println("PLAYER hand: ");
+	System.out.println("\nPLAYER hand: ");
 	for(intcount = 0; intcount < 5; intcount++){
 		con.println(" ");
 		System.out.println(playerhand[intcount][0] + " of " + playerhand[intcount][1]);
@@ -73,7 +73,7 @@ public class Blackjacktools{
 	con.println(" ");
 	con.println(" ");
 
-	System.out.println("DEALER hand: ");
+	System.out.println("\nDEALER hand: ");
 	for(intcount = 0; intcount < 5; intcount++){
 		con.println(" ");
 		System.out.println(dealerhand[intcount][0] + " of " + dealerhand[intcount][1]);
@@ -112,14 +112,14 @@ public class Blackjacktools{
 	// Players turn 
 	boolean blnstandings = false;
 	while(intplayer2 < 21 && !blnstandings && intcardsused < 5){
-		con.println("\n (H)Hit or (S)Stand");
+		con.println("\n(H)Hit or (S)Stand");
 		char charchoice = con.getChar();
 		
 	if(charchoice == 'H' || charchoice == 'h'){ // if they press hit 
 		
 		
-		//drawing after two given cards 
-		con.println("Third card: " + deck[intcardsused][0] + " of " + deck[intcardsused][1]);
+		//drawing after two given cards -- still player round 
+		con.println("\nThird card: " + deck[intcardsused][0] + " of " + deck[intcardsused][1]);
 		int intcardvalue  = Integer.parseInt(deck[intcardsused][0]);
 		
 		if(intcardvalue > 10){
@@ -132,7 +132,7 @@ public class Blackjacktools{
 		con.println("New Total: " + intplayer2);
 		
 		if(intplayer2 > 21){
-			con.println("Bust! You lose");
+			con.println("\nBust! You lose");
 			return con.getChar();
 		}
 		
@@ -140,11 +140,62 @@ public class Blackjacktools{
 		blnstandings = true;
 	}
 }
-			
+	// Dealers turn whether bust or hit 
+	con.println("\nDealer Round");
+	int intdealer = 0;
+	
+	for(intcount = 0; intcount < 2; intcount++){
+		con.println(deck[5 + intcount][0] + " of " + deck[ 5 + intcount][1]);
+		
+		int intcardvalue = Integer.parseInt(deck[intcount + 1][0]);
+		if(intcardvalue > 10){
+			intcardvalue = 10;
+		}else if(intcardvalue == 1){
+			intcardvalue = 11;
+		}
+		
+		intdealer += intcardvalue;
+	}
+	
+	int intdealercardsused = 2;
+	
+	con.println("Dealers Total: "+intdealer);
+	
+	// more cards after > 17 
+	while(intdealer < 17 && intdealercardsused < 5){
+		con.println("\nDrawing...");
+		
+		String strcard = deck[5 + intdealercardsused][0];
+		String strsuit = deck[5 + intdealercardsused][1];
+		
+		con.println(strcard + " of " + strsuit);
+		
+		int intcardvalue = Integer.parseInt(strcard);
+		if(intcardvalue > 10){
+			intcardvalue = 10;
+		}else if(intcardvalue == 1){
+			intcardvalue = 11;
+		}
+		intdealer += intcardvalue;
+		intdealercardsused++;
+	
+		con.println("Dealer total: " + intdealer);
+		
+		if(intdealer > 21){
+			con.println("\nDealer busts! Player wins");
+			return con.getChar();
+		}
+	}
+	
+	if(intdealer >= intplayer2){
+		con.println("Dealer wins with " + intdealer + " vs yours " + intplayer2);
+	}else{
+		con.println("You win with "  + intplayer2 + " vs dealers " + intdealer);
+	}
+	return con.getChar();	
 		
 		
-		char charkey = con.getChar();
-		return charkey;
+	
 
 	}
 
