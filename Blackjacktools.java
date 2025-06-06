@@ -192,12 +192,15 @@ public class Blackjacktools{
 	}else{
 		con.println("\nYou win with "  + intplayer2 + " vs dealers " + intdealer);
 	}
-	return con.getChar();	
+	
+	return con.getChar();
+}
 		
 		
 	
 
-	}
+	
+	
 
 
 	
