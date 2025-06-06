@@ -188,9 +188,9 @@ public class Blackjacktools{
 	}
 	
 	if(intdealer >= intplayer2){
-		con.println("Dealer wins with " + intdealer + " vs yours " + intplayer2);
+		con.println("\nDealer wins with " + intdealer + " vs yours " + intplayer2);
 	}else{
-		con.println("You win with "  + intplayer2 + " vs dealers " + intdealer);
+		con.println("\nYou win with "  + intplayer2 + " vs dealers " + intdealer);
 	}
 	return con.getChar();	
 		
