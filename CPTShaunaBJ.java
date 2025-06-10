@@ -30,12 +30,14 @@ import java.awt.image.BufferedImage;
 			con.println("                                                         (Q) Quit");
 			con.println("                                                         (H) Help");
 		    con.println("                                                                          ");
+		    con.println("                                            Betting amount: $1000");
 		    con.print("                                                     Enter a name: "); //con.print because we want it to be after the colon
 		    String strname = con.readLine();
-		    //TextFileOutput to take the name into a different file and then transfer it back to the leaderboard?
 		    
 			con.println("                                             Enter a Key Letter to begin: ");
-			                                                          // setting up the singular character 
+		
+
+                                                          // setting up the singular character 
 			                                                          char charkey = con.getChar();
 			System.out.println("you entered: "+charkey);
 			
@@ -62,7 +64,8 @@ import java.awt.image.BufferedImage;
 			charkey = Blackjacktools.help(con);	
 			
 		}
-			
+		
+		con.clear();
 			
 		}
 	}
