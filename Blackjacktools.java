@@ -3,7 +3,7 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 
 public class Blackjacktools{
-	public static char playtime(Console con){	
+	public static char playtime(Console con, String strname){	
 		
 	// Setting up 2D Array
 	String[][] deck = new String[52][3];
@@ -133,7 +133,6 @@ public class Blackjacktools{
 		
 		if(intplayer2 > 21){
 			con.println("\nBust! You lose");
-			return con.getChar();
 		}
 		
 	}else if(charchoice == 's' || charchoice == 'S'){
@@ -191,6 +190,15 @@ public class Blackjacktools{
 	}else{
 		con.println("\nYou win with "  + intplayer2 + " vs dealers " + intdealer);
 	}
+		con.println("\nHow much money did you win that round?");
+		double dblwinning = con.readDouble();
+		
+		TextOutputFile leaderboardout = new TextOutputFile("leaderboardredo.txt", true);
+		leaderboardout.println(strname);
+		leaderboardout.println(dblwinning);
+		leaderboardout.close();
+		
+		
 		con.println("\n Would you like to play another round?");
 		con.println("(P) Play again");
 		con.println("(N) NO");
@@ -202,17 +210,21 @@ public class Blackjacktools{
 		
 		if(charreplaykey == 'p'){
 			con.clear();
-			playtime(con);
+			return charreplaykey;
 		}else if(charreplaykey == 'n'){
 			con.clear();
 			
 			
 		}
 		
+		
+		
+	
+			
+		
 	
 	return con.getChar();
-}
-		
+}		
 		
 	
 
@@ -222,9 +234,27 @@ public class Blackjacktools{
 
 	
 	public static char leaderboard(Console con){
-		char charl = con.getChar();
-		return charl;
-	}
+		 con.clear();
+    con.setBackgroundColor(Color.BLACK);
+
+    TextInputFile leaderboardin = new TextInputFile("leaderboard.txt");
+    int count = 0;
+
+    while (!leaderboardin.eof()) {
+        String name = leaderboardin.readLine();
+        if (!leaderboardin.eof()) {
+            double amount = leaderboardin.readDouble();
+            con.println(name + " has won $ " + amount);
+            count++;
+        }
+    }
+
+    if (count == 0) {
+        con.println("No leaderboard entries found.");
+    }
+
+    return con.getChar();
+}
 	
 	public static char help(Console con){
 		
