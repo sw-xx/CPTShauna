@@ -133,7 +133,6 @@ public class Blackjacktools{
 		
 		if(intplayer2 > 21){
 			con.println("\nBust! You lose");
-			return con.getChar();
 		}
 		
 	}else if(charchoice == 's' || charchoice == 'S'){
@@ -183,7 +182,6 @@ public class Blackjacktools{
 		
 		if(intdealer > 21){
 			con.println("\nDealer busts! Player wins");
-			return con.getChar();
 		}
 	}
 	
@@ -192,6 +190,24 @@ public class Blackjacktools{
 	}else{
 		con.println("\nYou win with "  + intplayer2 + " vs dealers " + intdealer);
 	}
+		con.println("\n Would you like to play another round?");
+		con.println("(P) Play again");
+		con.println("(N) No thank you");
+		
+		con.repaint();
+		
+		char charreplaykey = con.getChar();
+		charreplaykey = Character.toLowerCase(charreplaykey);
+		
+		if(charreplaykey == 'p'){
+			con.clear();
+			playtime(con);
+		}else if(charreplaykey == 'n'){
+			con.clear();
+			
+			
+		}
+		
 	
 	return con.getChar();
 }
