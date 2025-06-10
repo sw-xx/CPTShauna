@@ -133,6 +133,7 @@ public class Blackjacktools{
 		
 		if(intplayer2 > 21){
 			con.println("\nBust! You lose");
+			return con.getChar();
 		}
 		
 	}else if(charchoice == 's' || charchoice == 'S'){
@@ -192,7 +193,7 @@ public class Blackjacktools{
 	}
 		con.println("\n Would you like to play another round?");
 		con.println("(P) Play again");
-		con.println("(N) No thank you");
+		con.println("(N) NO");
 		
 		con.repaint();
 		
