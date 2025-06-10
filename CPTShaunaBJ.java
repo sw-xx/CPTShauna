@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 	public class CPTShaunaBJ{
 		public static void main(String[] args){
 			Console con = new Console("Let's play Blackjack", 1280, 720);
+		
 			
 			BufferedImage imgbj = con.loadImage("blackjacklogo.png");
 			con.drawImage(imgbj, 100, 150);
@@ -40,14 +41,33 @@ import java.awt.image.BufferedImage;
                                                           // setting up the singular character 
 			                                                          char charkey = con.getChar();
 			System.out.println("you entered: "+charkey);
-			
-		 charkey = Character.toLowerCase(con.getChar());
-		
-		if(charkey == 'p'){ // PLAYTIMETOOLS
+			con.setDrawColor(Color.BLACK);
+			con.fillRect(0, 0, 1280, 720);
 			con.clear();
-			con.setBackgroundColor(Color.BLACK);
-			charkey = Blackjacktools.playtime(con);
-			
+			con.repaint();
+			if(charkey == 'p'){ // PLAYTIMETOOL
+			boolean blnplayagain = true;
+			while(blnplayagain){
+				Blackjacktools.playtime(con, strname);
+				con.println("\n Would you like to play another round?");
+				con.println("(P) Play again");
+				con.println("(N) No thank you");
+				
+				char charreplay = Character.toLowerCase(con.getChar());
+				if(charreplay == 'n'){
+					blnplayagain = false;
+					con.clear();
+				}else{
+					con.clear();
+				}
+			}
+			con.clear();
+
+		 charkey = Character.toLowerCase(con.getChar());
+		 con.clear();
+		 con.setBackgroundColor(Color.BLACK);
+		
+	
 		}else if(charkey == 'l'){ // LEADERBAORD TOOLS 
 			con.clear();
 			con.setBackgroundColor(Color.BLACK);
