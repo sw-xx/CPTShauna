@@ -3,7 +3,7 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 
 public class Blackjacktools{
-	public static char playtime(Console con, String strname, double dblbetamount){	
+	public static double playtime(Console con, String strname, double dblbetamount){	
 	
 	boolean blndoubledown = false;
 	boolean blnfivecardbonus = false;
@@ -241,22 +241,9 @@ public class Blackjacktools{
 	leaderboardout.println(dblbetamount);
 	leaderboardout.close();
 
-	// redo rounds 
-	con.println("\nWould you like to play another round?");
-	con.println("(P) Play again");
-	con.println("(N) NO");
-	char charreplaykey = con.getChar();
-	charreplaykey = Character.toLowerCase(charreplaykey);
-
-	if(charreplaykey == 'p'){
-		con.clear();
-		return charreplaykey;
-	}else{
-		con.clear();
-	}
-
 	
-	return con.getChar();
+	
+	return dblbetamount;
 }		
 		
 	
@@ -307,7 +294,9 @@ public class Blackjacktools{
 
 	public static char quit(Console con){
 		char charq = con.getChar();
-		return charq;
+		
+		con.println("Thanks for playing!");
+		return con.getChar();
 	}
 }
 
