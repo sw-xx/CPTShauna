@@ -47,19 +47,9 @@ import java.awt.image.BufferedImage;
 			con.repaint();
 			if(charkey == 'p'){ // PLAYTIMETOOL
 			boolean blnplayagain = true;
+			double dblbetamount = 1000;
 			while(blnplayagain){
-				Blackjacktools.playtime(con, strname);
-				con.println("\n Would you like to play another round?");
-				con.println("(P) Play again");
-				con.println("(N) No thank you");
-				
-				char charreplay = Character.toLowerCase(con.getChar());
-				if(charreplay == 'n'){
-					blnplayagain = false;
-					con.clear();
-				}else{
-					con.clear();
-				}
+				Blackjacktools.playtime(con, strname, dblbetamount);
 			}
 			con.clear();
 
