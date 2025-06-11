@@ -3,7 +3,10 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 
 public class Blackjacktools{
-	public static char playtime(Console con, String strname){	
+	public static char playtime(Console con, String strname, double dblbetamount){	
+	
+	boolean blndoubledown = false;
+	boolean blnfivecardbonus = false;
 		
 	// Setting up 2D Array
 	String[][] deck = new String[52][3];
@@ -109,67 +112,101 @@ public class Blackjacktools{
 	
 	con.println("Total: " + intplayer2);
 	
-	// Players turn 
-	boolean blnstandings = false;
-	while(intplayer2 < 21 && !blnstandings && intcardsused < 5){
-		con.println("\n(H)Hit or (S)Stand");
-		char charchoice = con.getChar();
-		
-	if(charchoice == 'H' || charchoice == 'h'){ // if they press hit 
-		
-		
-		//drawing after two given cards -- still player round 
-		con.println("\nThird card: " + deck[intcardsused][0] + " of " + deck[intcardsused][1]);
-		int intcardvalue  = Integer.parseInt(deck[intcardsused][0]);
-		
-		if(intcardvalue > 10){
-			intcardvalue = 10;
-		}else if(intcardvalue == 1){
-			intcardvalue = 11;
+	// special rules 
+	if(intplayer2 == 9 || intplayer2 == 10 || intplayer2 == 11){
+		con.println("\nYou have " + intplayer2 + ". Would you like to double your bet and draw one card only? (Y/N)");
+		char chardouble = con.getChar();
+		if(chardouble == 'y' || chardouble == 'Y'){
+			blndoubledown = true;
+			dblbetamount  = 2000;
+			con.println("Your bet is now $" + dblbetamount);
+
+			// one more card 
+			con.println("\nYour draw: " + deck[intcardsused][0] + " of " + deck[intcardsused][1]);
+			int intcardvalue = Integer.parseInt(deck[intcardsused][0]);
+			if(intcardvalue > 10){
+				intcardvalue = 10;
+			}else if(intcardvalue == 1){
+				intcardvalue = 11;
+			}
+			
+			intplayer2 += intcardvalue;
+			intcardsused++;
+
+			con.println("New Total: " + intplayer2);
 		}
-		intplayer2 += intcardvalue;
-		intcardsused++;
-		con.println("New Total: " + intplayer2);
-		
-		if(intplayer2 > 21){
-			con.println("\nBust! You lose");
-		}
-		
-	}else if(charchoice == 's' || charchoice == 'S'){
-		blnstandings = true;
 	}
-}
-	// Dealers turn whether bust or hit 
-	con.println("\nDealer Round");
+
+	// Bonus
+	if(intplayer2 == 21 && !blndoubledown){
+		con.println("\nBLACKJACK! You win 3x your bet.");
+		dblbetamount *= 3;
+		con.println("Player wins against dealer.");
+	}else if(Integer.parseInt(deck[5][0]) + Integer.parseInt(deck[6][0]) == 21){
+		con.println("\nDealer hits blackjack. You lose.");
+		dblbetamount = 0;
+		con.println("\nDealer wins against player.");
+
+	}
+
+	// Regular Player turn 
+	boolean blnstandings = false;
+	if(!blndoubledown && intplayer2 < 21){
+		while(intplayer2 < 21 && !blnstandings && intcardsused < 5){
+			con.println("\n(H)Hit or (S)Stand");
+			char charchoice = con.getChar();
+			if(charchoice == 'H' || charchoice == 'h'){
+				con.println("\nCard: " + deck[intcardsused][0] + " of " + deck[intcardsused][1]);
+				int intcardvalue = Integer.parseInt(deck[intcardsused][0]);
+				if(intcardvalue > 10){
+					intcardvalue = 10;
+				}else if(intcardvalue == 1){
+					intcardvalue = 11;
+				}
+				intplayer2 += intcardvalue;
+				intcardsused++;
+				con.println("New Total: " + intplayer2);
+
+				if(intplayer2 > 21){
+					con.println("\nBust! You lose.");
+					dblbetamount = 0;
+					con.println("Dealer wins against player.");
+
+				}
+			}else if(charchoice == 'S' || charchoice == 's'){
+				blnstandings = true;
+			}
+		}
+	}
+
+	if(intcardsused == 5 && intplayer2 <= 21){
+		con.println("\nFIVE CARD RULE! You win 3x your bet.");
+		dblbetamount = 3000;
+		blnfivecardbonus = true;
+		con.println("Player wins against dealer.");
+
+	}
+
+	con.println("\nDealer's Turn:");
 	int intdealer = 0;
-	
-	for(intcount = 0; intcount < 2; intcount++){
-		con.println(deck[5 + intcount][0] + " of " + deck[ 5 + intcount][1]);
-		
-		int intcardvalue = Integer.parseInt(deck[intcount + 1][0]);
+	int intdealercardsused = 2;
+
+	for(int i = 0; i < 2; i++){
+		con.println(deck[5 + i][0] + " of " + deck[5 + i][1]);
+		int intcardvalue = Integer.parseInt(deck[5 + i][0]);
 		if(intcardvalue > 10){
 			intcardvalue = 10;
 		}else if(intcardvalue == 1){
 			intcardvalue = 11;
 		}
-		
 		intdealer += intcardvalue;
 	}
-	
-	int intdealercardsused = 2;
-	
-	con.println("Dealers Total: "+intdealer);
-	
-	// more cards after > 17 
+	con.println("Dealer total: " + intdealer);
+
 	while(intdealer < 17 && intdealercardsused < 5){
-		con.println("\nDrawing...");
-		
-		String strcard = deck[5 + intdealercardsused][0];
-		String strsuit = deck[5 + intdealercardsused][1];
-		
-		con.println(strcard + " of " + strsuit);
-		
-		int intcardvalue = Integer.parseInt(strcard);
+		con.println("\nDealer draws...");
+		con.println(deck[5 + intdealercardsused][0] + " of " + deck[5 + intdealercardsused][1]);
+		int intcardvalue = Integer.parseInt(deck[5 + intdealercardsused][0]);
 		if(intcardvalue > 10){
 			intcardvalue = 10;
 		}else if(intcardvalue == 1){
@@ -177,51 +214,47 @@ public class Blackjacktools{
 		}
 		intdealer += intcardvalue;
 		intdealercardsused++;
-	
 		con.println("Dealer total: " + intdealer);
-		
+	}
+
+	// Therefore...
+	if(dblbetamount > 0 && !blndoubledown && !blnfivecardbonus){
 		if(intdealer > 21){
-			con.println("\nDealer busts! Player wins");
+			con.println("\nDealer busts! You win.");
+			con.println("Player wins against dealer.");
+
+		}else if(intdealer >= intplayer2){
+			con.println("\nDealer wins with " + intdealer + " vs your " + intplayer2);
+			dblbetamount = 0;
+			con.println("Dealer wins against player.");
+
+		}else{
+			con.println("\nYou win with " + intplayer2 + " vs dealer's " + intdealer);
+			con.println("Player wins against dealer.");
+
 		}
 	}
-	
-	if(intdealer >= intplayer2){
-		con.println("\nDealer wins with " + intdealer + " vs yours " + intplayer2);
+
+	// Leaderboard output 
+	TextOutputFile leaderboardout = new TextOutputFile("leaderboardredo.txt", true);
+	leaderboardout.println(strname);
+	leaderboardout.println(dblbetamount);
+	leaderboardout.close();
+
+	// redo rounds 
+	con.println("\nWould you like to play another round?");
+	con.println("(P) Play again");
+	con.println("(N) NO");
+	char charreplaykey = con.getChar();
+	charreplaykey = Character.toLowerCase(charreplaykey);
+
+	if(charreplaykey == 'p'){
+		con.clear();
+		return charreplaykey;
 	}else{
-		con.println("\nYou win with "  + intplayer2 + " vs dealers " + intdealer);
+		con.clear();
 	}
-		con.println("\nHow much money did you win that round?");
-		double dblwinning = con.readDouble();
-		
-		TextOutputFile leaderboardout = new TextOutputFile("leaderboardredo.txt", true);
-		leaderboardout.println(strname);
-		leaderboardout.println(dblwinning);
-		leaderboardout.close();
-		
-		
-		con.println("\n Would you like to play another round?");
-		con.println("(P) Play again");
-		con.println("(N) NO");
-		
-		con.repaint();
-		
-		char charreplaykey = con.getChar();
-		charreplaykey = Character.toLowerCase(charreplaykey);
-		
-		if(charreplaykey == 'p'){
-			con.clear();
-			return charreplaykey;
-		}else if(charreplaykey == 'n'){
-			con.clear();
-			
-			
-		}
-		
-		
-		
-	
-			
-		
+
 	
 	return con.getChar();
 }		
@@ -237,7 +270,7 @@ public class Blackjacktools{
 		 con.clear();
     con.setBackgroundColor(Color.BLACK);
 
-    TextInputFile leaderboardin = new TextInputFile("leaderboard.txt");
+    TextInputFile leaderboardin = new TextInputFile("leaderboardredo.txt");
     int count = 0;
 
     while (!leaderboardin.eof()) {
