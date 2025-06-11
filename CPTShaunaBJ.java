@@ -46,11 +46,34 @@ import java.awt.image.BufferedImage;
 			con.clear();
 			con.repaint();
 			if(charkey == 'p'){ // PLAYTIMETOOL
+			
 			boolean blnplayagain = true;
 			double dblbetamount = 1000;
+			boolean blnquit = false;
 			while(blnplayagain){
-				Blackjacktools.playtime(con, strname, dblbetamount);
+				dblbetamount = Blackjacktools.playtime(con, strname, dblbetamount);
+			con.println("\nWould you like to play another round?");
+			con.println("(P) Play again");
+			con.println("(N) No thank you");
+			char charreplay = Character.toLowerCase(con.getChar());
+
+			if(charreplay == 'n'){
+				blnplayagain = false;
+				blnquit = true;
+				con.clear();
+				con.setBackgroundColor(Color.BLACK);
+				con.fillRect(0, 0, 1280, 720); // black screen
+				con.repaint();
+	
+			}else{
+				con.clear(); // replay again
 			}
+		}	
+				
+		if(blnquit){
+			Blackjacktools.quit(con);
+			return;
+		}	
 			con.clear();
 
 		 charkey = Character.toLowerCase(con.getChar());
