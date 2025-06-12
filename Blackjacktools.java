@@ -137,7 +137,7 @@ public class Blackjacktools{
 			intcardsused++;
 
 			con.println("New Total: " + intplayer2);
-			c
+			
 		}
 	}
 
@@ -148,7 +148,7 @@ public class Blackjacktools{
 		con.println("Player wins against dealer.");
 	}else if(Integer.parseInt(deck[5][0]) + Integer.parseInt(deck[6][0]) == 21){
 		con.println("\nDealer hits blackjack. You lose. Dealer wins against Player");
-		dblbet = 0;
+		dblbet = dblamount - dblbet;
 		con.println("You have now no money");
 
 	}
@@ -173,8 +173,9 @@ public class Blackjacktools{
 
 				if(intplayer2 > 21){
 					con.println("\nBust! You lose.");
-					dblamount = dblamount - dblbet;
+					dblamount = 0;
 					con.println("Dealer wins against player.");
+					con.println("you have now no money: $"+dblamount);
 
 				}
 			}else if(charchoice == 'S' || charchoice == 's'){
@@ -232,8 +233,9 @@ public class Blackjacktools{
 
 		}else if(intdealer >= intplayer2){
 			con.println("\nDealer wins with " + intdealer + " vs your " + intplayer2);
-			dblbetamount = dblbetamount - dblbet;
+			dblbetamount = 0;
 			con.println("Dealer wins against player.");
+			con.println("you have now: $"+dblbetamount);
 
 		}else{
 			con.println("\nYou win with " + intplayer2 + " vs dealer's " + intdealer);
