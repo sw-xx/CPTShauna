@@ -12,3 +12,15 @@ shauna
 2000.0
 shauna
 0.0
+shauna
+1000.0
+shauna
+1800.0
+shauna
+2000.0
+shauna
+1000.0
+shauna
+1000.0
+shauna
+2000.0
