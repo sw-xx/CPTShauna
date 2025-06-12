@@ -5,7 +5,11 @@ import java.awt.image.BufferedImage;
 	public class CPTShaunaBJ{
 		public static void main(String[] args){
 			Console con = new Console("Let's play Blackjack", 1280, 720);
-		
+			
+			//Shauna Wong 
+			//BlackJack 
+			//Last Modification Date: 6/12/2025
+			// V.10.8
 			
 			BufferedImage imgbj = con.loadImage("blackjacklogo.png");
 			con.drawImage(imgbj, 100, 150);
