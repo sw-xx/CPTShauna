@@ -258,20 +258,48 @@ public class Blackjacktools{
     con.setBackgroundColor(Color.BLACK);
 
     TextInputFile leaderboardin = new TextInputFile("leaderboardredo.txt");
-    int count = 0;
-
-    while (!leaderboardin.eof()) {
-        String name = leaderboardin.readLine();
+    
+    
+    String[] strnames = new String[100];
+	double[] dblamounts = new double[100];
+    int intcount = 0;
+    
+     while (!leaderboardin.eof() && intcount < 100) {
+        strnames[intcount] = leaderboardin.readLine();
         if (!leaderboardin.eof()) {
-            double amount = leaderboardin.readDouble();
-            con.println(name + " has won $ " + amount);
-            count++;
+            dblamounts[intcount] = leaderboardin.readDouble();
+            intcount++;
+        }
+    }
+    leaderboardin.close();
+    
+    String strtempname;
+	double dbltempamount;
+
+	for (int intpass = 0; intpass < intcount - 1; intpass++) {
+		for (int intcount2 = 0; intcount2 < intcount - 1 - intpass; intcount2++) {
+			if (dblamounts[intcount2] < dblamounts[intcount2 + 1]) {
+            // swap amounts
+            dbltempamount = dblamounts[intcount2];
+            dblamounts[intcount2] = dblamounts[intcount2 + 1];
+            dblamounts[intcount2 + 1] = dbltempamount;
+
+            // swap corresponding names
+            strtempname = strnames[intcount2];
+            strnames[intcount2] = strnames[intcount2 + 1];
+            strnames[intcount2 + 1] = strtempname;
+        }
+    }
+}
+		if (intcount == 0) {
+        con.println("Nothing Found");
+		} else {
+        con.println("Leaderboard (Highest to Lowest):");
+        for (int i = 0; i < intcount; i++) {
+            con.println(strnames[i] + " has won $ " + dblamounts[i]);
         }
     }
 
-    if (count == 0) {
-        con.println("No leaderboard entries found.");
-    }
 
     return con.getChar();
 }
