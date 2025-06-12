@@ -8,6 +8,8 @@ public class Blackjacktools{
 	double dblamount = 1000;
 	con.print("Enter your bet amount: ");
 	double dblbet = con.readDouble();
+	
+	
 	boolean blndoubledown = false;
 	boolean blnfivecardbonus = false;
 		
@@ -122,7 +124,7 @@ public class Blackjacktools{
 		if(chardouble == 'y' || chardouble == 'Y'){
 			blndoubledown = true;
 			dblbetamount  = dblbet * 2;
-			con.println("Your bet is now $" + dblbetamount);
+			con.println("You doubled your bet to $" + dblbetamount);
 
 			// one more card 
 			con.println("\nYour draw: " + deck[intcardsused][0] + " of " + deck[intcardsused][1]);
