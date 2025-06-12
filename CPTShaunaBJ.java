@@ -35,11 +35,12 @@ import java.awt.image.BufferedImage;
 			con.println("                                                         (Q) Quit");
 			con.println("                                                         (H) Help");
 		    con.println("                                                                          ");
-		    con.println("                                            Betting amount: $1000");
+		    con.println("                                              MAX Betting amount: $1000");
 		    con.print("                                                     Enter a name: "); //con.print because we want it to be after the colon
+		    
 		    String strname = con.readLine();
 		    
-			con.println("                                             Enter a Key Letter to begin: ");
+			con.println("                                                     Enter a Key Letter to begin: ");
 		
 
                                                           // setting up the singular character 
