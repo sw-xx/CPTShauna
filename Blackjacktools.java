@@ -5,6 +5,9 @@ import java.awt.image.BufferedImage;
 public class Blackjacktools{
 	public static double playtime(Console con, String strname, double dblbetamount){	
 	
+	double dblamount = 1000;
+	con.print("Enter your bet amount: ");
+	double dblbet = con.readDouble();
 	boolean blndoubledown = false;
 	boolean blnfivecardbonus = false;
 		
@@ -118,7 +121,7 @@ public class Blackjacktools{
 		char chardouble = con.getChar();
 		if(chardouble == 'y' || chardouble == 'Y'){
 			blndoubledown = true;
-			dblbetamount  = 2000;
+			dblbetamount  = dblbet * 2;
 			con.println("Your bet is now $" + dblbetamount);
 
 			// one more card 
@@ -134,18 +137,19 @@ public class Blackjacktools{
 			intcardsused++;
 
 			con.println("New Total: " + intplayer2);
+			c
 		}
 	}
 
 	// Bonus
 	if(intplayer2 == 21 && !blndoubledown){
 		con.println("\nBLACKJACK! You win 3x your bet.");
-		dblbetamount *= 3;
+		dblbetamount = dblbet * 3;
 		con.println("Player wins against dealer.");
 	}else if(Integer.parseInt(deck[5][0]) + Integer.parseInt(deck[6][0]) == 21){
-		con.println("\nDealer hits blackjack. You lose.");
-		dblbetamount = 0;
-		con.println("\nDealer wins against player.");
+		con.println("\nDealer hits blackjack. You lose. Dealer wins against Player");
+		dblbet = 0;
+		con.println("You have now no money");
 
 	}
 
@@ -169,7 +173,7 @@ public class Blackjacktools{
 
 				if(intplayer2 > 21){
 					con.println("\nBust! You lose.");
-					dblbetamount = 0;
+					dblamount = dblamount - dblbet;
 					con.println("Dealer wins against player.");
 
 				}
@@ -181,9 +185,10 @@ public class Blackjacktools{
 
 	if(intcardsused == 5 && intplayer2 <= 21){
 		con.println("\nFIVE CARD RULE! You win 3x your bet.");
-		dblbetamount = 3000;
+		dblbetamount = dblbet * 3;
 		blnfivecardbonus = true;
 		con.println("Player wins against dealer.");
+	
 
 	}
 
@@ -222,10 +227,12 @@ public class Blackjacktools{
 		if(intdealer > 21){
 			con.println("\nDealer busts! You win.");
 			con.println("Player wins against dealer.");
+			dblbetamount = dblbet * 2;
+			con.println("you won: " +dblbetamount);
 
 		}else if(intdealer >= intplayer2){
 			con.println("\nDealer wins with " + intdealer + " vs your " + intplayer2);
-			dblbetamount = 0;
+			dblbetamount = dblbetamount - dblbet;
 			con.println("Dealer wins against player.");
 
 		}else{
